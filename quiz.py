@@ -26,7 +26,6 @@ def question():
 
 @app.route("/answer", methods = ["GET", "POST"])
 def answer():
-    all_results = []
     choice_form = ChoiceForm(csrf_enabled = False)
     if request.method == "POST":
         con = sqlite3.connect("quiz.db")
@@ -39,43 +38,42 @@ def answer():
         form_data = dict(request.form.items())
         print('form_data', form_data)
         print('sql_rows', sql_rows)
-        # for item in form_data.items():
-        return render_template("results.html", rows=sql_rows, template_form=choice_form)
 
+        all_results = []
+        total_questions = len(sql_rows)
+        number_correctly_answered = 0
 
-            # if item[0] != 'submit':
-            #     form_key = int(item[0].replace('question', ''))
-            #     form_value = item[1].upper()
-                
-            #     # declare item_results with default
-            #     item_results = {
-            #         'question_id': str(form_key),
-            #         'user_answered': '',
-            #         'correct_answer': '',
-            #         'is_correct': False
-            #     }
+        for item in sql_rows.items():
+            answer_key_question_id = str(item[0])
+            answer_key_question_answer = item[1]
+            
+            # check to see if user answered the question 
+            if answer_key_question_id in form_data:
+                # user answered, check if it correct
+                if (answer_key_question_answer == form_data[answer_key_question_id].upper()):
+                    item_results = {
+                        'question_id': answer_key_question_id,
+                        'user_answered': form_data[answer_key_question_id].upper(),
+                        'correct_answer': answer_key_question_answer,
+                        'is_correct': True
+                    }
+                    number_correctly_answered = number_correctly_answered + 1
+                # user answered, but it is incorrect
+                else:
+                    item_results = {
+                    'question_id': answer_key_question_id,
+                    'user_answered': form_data[answer_key_question_id].upper(),
+                    'correct_answer': answer_key_question_answer,
+                    'is_correct': False
+                }
+            #user did not answer so it is incorrect
+            else:
+                item_results = {
+                    'question_id': answer_key_question_id,
+                    'user_answered': '',
+                    'correct_answer': answer_key_question_answer,
+                    'is_correct': False
+                }
+            all_results.append(item_results)
+        return render_template("results.html", all_results=all_results, total_questions=total_questions, number_correctly_answered=number_correctly_answered, template_form=choice_form)
 
-                # print('this is my item to compare', form_key, form_value)
-                
-
-                # if form_value == sql_rows.get(form_key).upper():
-                #     print('it is correct')
-                #     item_results = {
-                #         'question_id': str(form_key),
-                #         'user_answered': form_value.upper(),
-                #         'correct_answer': sql_rows.get(form_key).upper(),
-                #         'is_correct': True
-                #     }
-
-                # else: 
-                #     print('it is not correct')
-                #     item_results = {
-                #         'question_id': str(form_key),
-                #         'user_answered': form_value.upper(),
-                #         'correct_answer': sql_rows.get(form_key).upper(),
-                #         'is_correct': False
-                #     }
-
-            #     all_results.append(item_results)
-            # print(*all_results)
-        
