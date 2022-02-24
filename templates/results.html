@@ -10,12 +10,20 @@
                 <th>Question #</th> 
                 <th>Your Answer</th>
                 <th>Correct Answer</th>
+                <th>Result</th>
             </tr>
-            {% for row in rows %}
+            {% for row in all_results %}
             <tr>
-                <td>{{ row["q_id"] }}</td>
-                <td>{{ row["q_id"] }}</td>
+                <td>{{ row["question_id"] }}</td>
+                <td>{{ row["user_answered"] }}</td>
                 <td>{{ row["correct_answer"] }}</td>
+                <td>{{ 'Correct' if row["is_correct"] else 'Incorrect' }}</td>
             </tr>
             {% endfor %}
         </table>
+
+        <p>
+            Total questions: {{ total_questions }} <br />
+            Correctly answered: {{ number_correctly_answered }} <br />
+            Your score: {{ (number_correctly_answered / total_questions) * 100 }}%
+        </p>
