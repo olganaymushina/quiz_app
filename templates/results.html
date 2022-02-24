@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='main/quiz.css') }}"> 
+    </head>
+    <body>
+        <h3>Your Results</h3>
+        <table>
+            <tr>
+                <th>Question #</th> 
+                <th>Your Answer</th>
+                <th>Correct Answer</th>
+            </tr>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row["q_id"] }}</td>
+                <td>{{ row["q_id"] }}</td>
+                <td>{{ row["correct_answer"] }}</td>
+            </tr>
+            {% endfor %}
+        </table>

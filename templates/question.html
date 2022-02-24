@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+    <head>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='main/quiz.css') }}"> 
+    </head>
+    <body>
+        <h3>Quiz</h3>
+        <br>
+        <br>
+        <form action="/answer" method="POST">
+            {% for row in rows %}
+            <table>
+                <tr>
+                    <th> </th>
+                    <th>{{ row["question"] }}</th>
+                </tr>
+                <td class="choice">
+                     <label for=”a”>a</label>
+                    <input id="a" name={{ row["q_id"] }} type="radio" value="a" /> 
+                </td>
+                        <td> 
+                            {{ row["choice_a"] }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="choice">
+                            <label for=”b”>b</label> 
+                            <input id="b" name={{ row["q_id"] }} type="radio" value="b" /> 
+                        </td>
+                        <td> 
+                            {{ row["choice_b"] }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="choice">
+                            <label for=”c”>c</label> 
+                            <input id="c" name={{ row["q_id"] }} type="radio" value="c" /> 
+                        </td>
+                        <td> 
+                            {{ row["choice_c"] }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="choice">
+                            <label for=”d”>d</label>
+                            <input id="d" name={{ row["q_id"] }} type="radio" value="d" /> 
+                                                    </td>
+                        <td> 
+                            {{ row["choice_d"] }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            {% endfor %}
+            <br>
+            <p> {{ template_form.submit() }} </p>
+        </form>
+
+        <br>
+        <br>
+        <a href = "/">Go back to home page</a>
+    </body>
+</html>

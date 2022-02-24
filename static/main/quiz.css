@@ -1,0 +1,53 @@
+table, th, td {
+    border: 1px solid blue;
+  }
+
+ .choice {
+     width: 35%;
+ }
+
+
+th {
+    font-size: 24px;
+    background-color: rgb(110, 206, 206);
+    color:rgb(122, 36, 104);
+
+}
+ td {
+     font-size: 20px;
+     text-align: center;
+     background-color: rgb(110, 206, 206);
+ }
+
+
+
+ h1 {
+     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+     color:rgb(94, 17, 81);
+     font-size: 33px;
+     text-align: center;
+     background-color: skyblue;
+     border-radius: 20px;
+     margin-bottom: 0;
+     margin-top: 0;
+     padding-bottom: 0px;
+     padding-top: 0px;
+ }
+
+ h3, h4 {
+     font-size: 24px;
+     text-align: center;
+     color: indigo;
+     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+ }
+
+ p {
+     font-size: 22px;
+     color: goldenrod;
+     text-align: center;
+ }
+
+
+
+
